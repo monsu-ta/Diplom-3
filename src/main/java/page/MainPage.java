@@ -21,28 +21,32 @@ public class MainPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
-
+    @Step("Открытие главной страницы сайта")
     public void open() {
         driver.get("https://stellarburgers.nomoreparties.site/");
         wait.until(ExpectedConditions.urlContains("stellarburgers"));
     }
 
-    public void clickLoginInAccountButton(){
+    @Step("Клик кнопки «Войти в аккаунт»")
+    public void clickLoginInAccountButton() {
         wait.until(ExpectedConditions.elementToBeClickable(loginInAccountButton)).click();
     }
 
+    @Step("Клик кнопки «Личный Кабинет»")
     public void clickPersonalAccountButton() {
         wait.until(ExpectedConditions.elementToBeClickable(personalAccountButton)).click();
     }
 
+    @Step("Проверка отображения кнопки «Оформить заказ»")
     public boolean isOrderButtonDisplayed() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(orderButton)).isDisplayed();
     }
 
+    @Step("Проверка успешной авторизации")
     public void verifyLoginSuccess() {
         if (!isOrderButtonDisplayed()) {
             throw new AssertionError("Login failed - order button not visible");
         }
-    }
+}
 
 }

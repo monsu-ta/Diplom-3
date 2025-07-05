@@ -22,30 +22,34 @@ public class LoginPage {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
-
+    @Step("Авторизация с учетными данными")
     public MainPage loginWithCredentials(UserCredentials credentials) {
         enterEmail(credentials.getEmail());
         enterPassword(credentials.getPassword());
         clickLoginButton();
         return new MainPage(driver);
     }
-
+    @Step("Ввод email")
     public void enterEmail(String email) {
         driver.findElement(emailField).sendKeys(email);
     }
 
+    @Step("Ввод пароля")
     public void enterPassword(String password) {
         driver.findElement(passwordField).sendKeys(password);
     }
 
+    @Step("Клик кнопки «Войти»")
     public void clickLoginButton() {
         driver.findElement(loginButton).click();
     }
 
+    @Step("Клик кнопки «Зарегистрироваться»")
     public void clickRegisterButton() {
         driver.findElement(registerLink).click();
     }
 
+    @Step("Проверка отображения заголовка «Вход»")
     public boolean isLoginHeaderDisplayed() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(loginHeader)).isDisplayed();
 

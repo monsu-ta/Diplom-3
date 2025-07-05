@@ -50,19 +50,16 @@ public class BaseTest {
 
     @After
     public void tearDown() {
-        deleteTestUser();
-        quitDriver();
-    }
-
-    protected void deleteTestUser() {
-        if (testUser != null) {
-            userClient.deleteUser(testUser);
-        }
-    }
-
-    protected void quitDriver() {
-        if (driver != null) {
-            driver.quit();
+        try {
+            if (testUser != null) {
+                userClient.deleteUser(testUser);
+            }
+        } catch (Exception e) {
+            System.out.println("Проблема удаления пользователя: " + e.getMessage());
+        } finally {
+            if (driver != null) {
+                driver.quit();
+            }
         }
     }
 

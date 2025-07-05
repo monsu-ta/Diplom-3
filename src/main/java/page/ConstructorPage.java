@@ -20,18 +20,22 @@ public class ConstructorPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
+    @Step("Клик кнопки «Булки»")
     public void clickBunsTab() {
         driver.findElement(bunsTab).click();
     }
 
+    @Step("Клик кнопки «Соусы»")
     public void clickSaucesTab() {
         driver.findElement(saucesTab).click();
     }
 
+    @Step("Клик кнопки «Начинки»")
     public void clickFillingsTab() {
         driver.findElement(fillingsTab).click();
     }
 
+    @Step("Получение текста активной вкладки")
     public String getActiveTabText() {
         return driver.findElement(activeTab).getText();
     }
