@@ -3,6 +3,7 @@ package tests;
 import api.UserClient;
 import core.WebDriverFactory;
 
+import io.qameta.allure.Step;
 import model.User;
 import org.junit.After;
 import org.junit.Before;
@@ -21,12 +22,14 @@ public class BaseTest {
         initializeDriver();
     }
 
+    @Step("Инициализация драйвера")
     protected void initializeDriver() {
         driver = WebDriverFactory.createDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
+    @Step("Создание тестового пользователя")
     protected void createTestUser() {
         testUser = User.getRandomUser();
 
@@ -39,7 +42,7 @@ public class BaseTest {
 
         System.out.println("Created test user: " + testUser.getEmail());
     }
-
+    @Step("Создание и регистрация тестового пользователя")
     protected User createAndRegisterTestUser() {
         User user = User.getRandomUser();
         userClient.createUser(user)
@@ -49,6 +52,7 @@ public class BaseTest {
     }
 
     @After
+    @Step("Удаление тестового пользователя (при его наличии) и закрытие браузера")
     public void tearDown() {
         try {
             if (testUser != null) {
